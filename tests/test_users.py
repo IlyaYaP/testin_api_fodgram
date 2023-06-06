@@ -10,3 +10,4 @@ def test_users():
     response = Response_response(r)
     response.assert_status_code(200)
     response.validate(UserList)
+    print(r.json())

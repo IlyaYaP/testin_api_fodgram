@@ -6,24 +6,17 @@ from pydantic import AnyUrl, BaseModel, EmailStr, HttpUrl, constr, validator
 class Users(BaseModel):
     id: int
     email: EmailStr
-    # username: constr(max_length=150)
-    username: str
-    # firstname: constr(max_length=150)
-    firstname: str
-    lastname: constr(max_length=150)
-    is_subscribad: bool
+    username: constr(max_length=150)
+    first_name: constr(max_length=150)
+    last_name: constr(max_length=150)
+    is_subscribed: bool
 
 
 class UserList(BaseModel):
     count: int
     next: Union[str, None]
     previous: Union[str, None]
-    results: list
-
-    @validator("results")
-    def results_validate(cls, value):
-        for item in value:
-            item(Users)
+    results: list[Users]
 
 
 
