@@ -1,7 +1,7 @@
 from src.errors import ErrorMessaages
 
 
-class Response_response():
+class Response():
     def __init__(self, response):
         self.response = response
         self.response_json = response.json()
