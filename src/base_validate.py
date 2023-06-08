@@ -16,6 +16,6 @@ class Response():
 
     def assert_status_code(self, statuse_code):
         if isinstance(statuse_code, list):
-            assert self.response_status in statuse_code, ErrorMessaages.WRONG_STATUS_CODE
+            assert self.response_status in statuse_code, f'{ErrorMessaages.WRONG_STATUS_CODE}, status code = {self.response_status}, {self.response_json}'
         else:
-            assert self.response_status == statuse_code, ErrorMessaages.WRONG_STATUS_CODE
+            assert self.response_status == statuse_code, f'{ErrorMessaages.WRONG_STATUS_CODE}, status code = {self.response_status}, {self.response_json}'
