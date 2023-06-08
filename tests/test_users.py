@@ -13,11 +13,12 @@ from src.data import UsersData
 #     response.validate(UserList)
 
 
-# def test_user_registration():
-#     r = requests.post(url=UsersEndPoints.USER_REGISTRATION, data=UsersData.USER_REGISTRATION_DATA)
-#     response = Response(r)
-#     response.assert_status_code(400)
-#     response.validate(UserRegistration)
+def test_user_registration():
+    r = requests.post(url=UsersEndPoints.USER_REGISTRATION, data=UsersData.USER_REGISTRATION_DATA)
+    response = Response(r)
+    response.assert_status_code(200)
+    # требуется обработать статус 400, когда пользователь с такими данными уже есть
+    response.validate(UserRegistration)
 
 
 def test_negative_user_registration():
