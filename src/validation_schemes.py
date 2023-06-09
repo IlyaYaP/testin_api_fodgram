@@ -1,6 +1,8 @@
-from typing import Union, Optional
+from typing import Optional, Union
 
-from pydantic import AnyUrl, BaseModel, EmailStr, HttpUrl, constr, validator, Field
+from pydantic import (AnyUrl, BaseModel, EmailStr, Field, HttpUrl, constr,
+                      validator)
+
 from src.errors import ErrorMessaages
 
 
