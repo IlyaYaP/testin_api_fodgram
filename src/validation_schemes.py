@@ -42,8 +42,3 @@ class InvalidUserRegistration(BaseModel):
     def validatet_email(cls, value):
         if value[0] not in ErrorMessaages.WRONG_VALIDATE_ERRORS:
             raise ValueError(f'Что то пошло не так, {value[0]}')
-
-        # for error in ErrorMessaages.WRONG_VALIDATE_ERRORS:
-        #     if value != error:
-        #         raise ValueError(f'Что то пошло не так, {value}, {error}')
-
