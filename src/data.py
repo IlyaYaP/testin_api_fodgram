@@ -14,3 +14,16 @@ class UsersData():
                                 "last_name": "Пупкин",
                                 "password": "Qwerty12asd3"
                                 }
+
+    LOGIN_USER_TOKEN_DATA = {
+
+                            "password": "Qwerty12asd3",
+                            "email": "vpupki@nyandex.ru"
+
+                            }
+    INVALID_LOGIN_USER_TOKEN_DATA = {
+
+                            "password": "Qwerty2asd3",
+                            "email": "vpupki@nyandex.ru"
+
+                            }

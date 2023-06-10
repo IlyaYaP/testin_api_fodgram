@@ -1,6 +1,9 @@
 import allure
+import requests
 from src.base_validate import Response
 from src.validation_schemes import InvalidUserRegistration, UserRegistration
+from src.data import UsersData
+from src.endpoints import UsersEndPoints
 
 
 class UsersValidate(Response):
@@ -17,3 +20,8 @@ class UsersValidate(Response):
                     print(f'status_code = {self.response_status}, respone = {self.response_json}')
             else:
                 assert self.response_status != 400 or 200, 'Что то пошло не так.'
+
+    def user_auth_token(self):
+        user_token = self.response_json["auth_token"]
+        return user_token
+
