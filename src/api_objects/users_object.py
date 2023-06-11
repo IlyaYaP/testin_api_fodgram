@@ -21,7 +21,4 @@ class UsersValidate(Response):
             else:
                 assert self.response_status != 400 or 200, 'Что то пошло не так.'
 
-    def user_auth_token(self):
-        user_token = self.response_json["auth_token"]
-        return user_token
 

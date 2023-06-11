@@ -42,3 +42,14 @@ class InvalidUserRegistration(BaseModel):
     def validatet_email(cls, value):
         if value[0] not in ErrorMessaages.WRONG_VALIDATE_ERRORS:
             raise ValueError(f'Что то пошло не так, {value[0]}')
+
+
+class UsersProfileError(BaseModel):
+    detail: str
+
+class InvalidChangingPassword(BaseModel):
+    current_password: list = Field(...)
+    @validator("current_password")
+    def validate_current_password(cls, value):
+        if value[0] not in ErrorMessaages.WRONG_VALIDATE_ERRORS:
+            raise ValueError(f'Что то пошло не так, {value[0]}')

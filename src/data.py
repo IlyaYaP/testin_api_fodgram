@@ -27,3 +27,23 @@ class UsersData():
                             "email": "vpupki@nyandex.ru"
 
                             }
+    
+    CHANGING_PASSWORD_DATA = {
+
+                        "new_password": "Awerty2asd3",
+                        "current_password": "Qwerty12asd3"
+
+                        }
+    
+    RETURN_CHANGING_PASSWORD_DATA = {
+
+                        "new_password": "Qwerty12asd3",
+                        "current_password": "Awerty2asd3"
+
+                        }
+    
+    INVALIDE_CHANGING_PASSWORD_DATA = {
+
+                        "new_password": "Awerty2asd3"
+
+                        }
