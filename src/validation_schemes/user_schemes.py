@@ -47,8 +47,10 @@ class InvalidUserRegistration(BaseModel):
 class UsersProfileError(BaseModel):
     detail: str
 
+
 class InvalidChangingPassword(BaseModel):
     current_password: list = Field(...)
+
     @validator("current_password")
     def validate_current_password(cls, value):
         if value[0] not in ErrorMessaages.WRONG_VALIDATE_ERRORS:

@@ -1,9 +1,9 @@
 import allure
-import requests
+
 from src.base_validate import Response
-from src.validation_schemes import InvalidUserRegistration, UserRegistration
-from src.data import UsersData
-from src.endpoints import UsersEndPoints
+from src.errors import ErrorMessaages
+from src.validation_schemes.user_schemes import (InvalidUserRegistration,
+                                                 UserRegistration)
 
 
 class UsersValidate(Response):
@@ -21,4 +21,10 @@ class UsersValidate(Response):
             else:
                 assert self.response_status != 400 or 200, 'Что то пошло не так.'
 
-
+    def user_assert_status_code(self, statuse_code):
+        '''Функция проверки статус код.'''
+        with allure.step(f'Проверяем статус-код ответа. Ожидем = {statuse_code}'):
+            if isinstance(statuse_code, list):
+                assert self.response_status in statuse_code, f'{ErrorMessaages.WRONG_STATUS_CODE}, status code = {self.response_status}, {self.response_json}'
+            else:
+                assert self.response_status == statuse_code, f'{ErrorMessaages.WRONG_STATUS_CODE}, status code = {self.response_status}, {self.response_json}'

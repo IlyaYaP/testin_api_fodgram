@@ -1,7 +1,8 @@
 import allure
 import requests
-from src.errors import ErrorMessaages
+
 from src.endpoints import UsersEndPoints
+from src.errors import ErrorMessaages
 
 
 class Response():
@@ -35,3 +36,17 @@ class Response():
             # headers = {'Authorization': f'Token {token}'}
             user_token = r.json()["auth_token"]
             return user_token
+
+
+class NoResponse():
+    def __init__(self, response):
+        self.response = response
+        self.response_status = response.status_code
+
+    def assert_status_code(self, statuse_code):
+        '''Функция проверки статус код.'''
+        with allure.step(f'Проверяем статус-код ответа. Ожидем = {statuse_code}'):
+            if isinstance(statuse_code, list):
+                assert self.response_status in statuse_code, f'{ErrorMessaages.WRONG_STATUS_CODE}, status code = {self.response_status}'
+            else:
+                assert self.response_status == statuse_code, f'{ErrorMessaages.WRONG_STATUS_CODE}, status code = {self.response_status}'
