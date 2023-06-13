@@ -41,24 +41,32 @@ class UsersData():
                         "current_password": "Awerty2asd3"
 
                         }
-   
+
     INVALIDE_CHANGING_PASSWORD_DATA = {
 
                         "new_password": "Awerty2asd3"
 
                         }
+
+
+class RecipeData():
     RECIPE_CREATE_DATA = {
-                        "ingredients": [{"id": 22,
-                                        "amount": 2}],
-
-                        "tags": [1],
-                        "image": "data:image/jpeg;base64",
-                        "name": "test recipe",
-                        "text": "description test recipe",
-                        "cooking_time": 1
-
+                            "ingredients": [
+                                {
+                                    "id": 1123,
+                                    "amount": 10
+                                }
+                            ],
+                            "tags": [
+                                1,
+                                2
+                            ],
+                            "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAgMAAABieywaAAAACVBMVEUAAAD///9fX1/S0ecCAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAACklEQVQImWNoAAAAggCByxOyYQAAAABJRU5ErkJggg==",
+                            "name": "test recipe",
+                            "text": "description test",
+                            "cooking_time": 1
                         }
-                    
+
 
 
 # {'count': 1, 

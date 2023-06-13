@@ -4,12 +4,9 @@ import requests
 
 from src.api_objects.users_object import UsersValidate
 from src.base_validate import NoResponse, Response
-from src.data import UsersData
+from src.data import UsersData, RecipeData
 from src.endpoints import UsersEndPoints, RecipesEndPoints
-from src.validation_schemes.user_schemes import (InvalidChangingPassword,
-                                                 InvalidUserRegistration,
-                                                 UserList,
-                                                 Users, UsersProfileError)
+from src.validation_schemes.recipes_schemes import Recipes, RecipesResult
 
 
 
@@ -18,12 +15,10 @@ from src.validation_schemes.user_schemes import (InvalidChangingPassword,
 def test_create_recipe():
     token = Response.user_auth_token(data=UsersData.LOGIN_USER_TOKEN_DATA)
     headers = {'Authorization': f'Token {token}'}
-    r = requests.post(url=RecipesEndPoints.RECIPES_LIST, headers=headers, data=UsersData.RECIPE_CREATE_DATA)
-    # response = Response(r)
-    # response.assert_status_code(200)
-    print(r.json())
-    print(r.status_code)
-    # response.validate(UserList)
+    r = requests.post(url=RecipesEndPoints.RECIPES_LIST, json=RecipeData.RECIPE_CREATE_DATA, headers=headers)
+    response = Response(r)
+    response.assert_status_code(201)
+    response.validate(RecipesResult)
 
 @pytest.mark.test_recipes_list
 @allure.story('Тест получения списка рецептов.')

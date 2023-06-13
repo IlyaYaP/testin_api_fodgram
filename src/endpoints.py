@@ -16,3 +16,6 @@ class TagsEndPoints():
 
 class RecipesEndPoints():
     RECIPES_LIST = 'http://localhost/api/recipes/'
+
+class IngredientsEndPoints():
+    INGREDIENTS_LIST = 'http://localhost/api/ingredients/'

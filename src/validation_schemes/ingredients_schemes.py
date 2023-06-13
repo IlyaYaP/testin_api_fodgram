@@ -4,8 +4,8 @@ from pydantic import (AnyUrl, BaseModel, EmailStr, Field, HttpUrl, constr,
                       validator)
 
 from src.errors import ErrorMessaages
-from user_schemes import Users
-from tags_schemes import Tags
+from .user_schemes import Users
+from .tags_schemes import Tags
 
 
 # "id": 0,
