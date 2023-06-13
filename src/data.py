@@ -68,6 +68,26 @@ class RecipeData():
                         }
 
 
+    INVALID_RECIPE_CREATE_DATA = {
+                            "ingredients": [
+                                {
+                                    "id": 1123,
+                                    "amount": 10
+                                }
+                            ],
+                            "tags": [
+                                1,
+                                2
+                            ],
+                            "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAgMAAABieywaAAAACVBMVEUAAAD///9fX1/S0ecCAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAACklEQVQImWNoAAAAggCByxOyYQAAAABJRU5ErkJggg==",
+                            "name": "test recipe",
+                            "text": "description test",
+                            "cooking_time": "str"
+                        }
+
+
+
+
 
 # {'count': 1, 
 #  'next': None, 

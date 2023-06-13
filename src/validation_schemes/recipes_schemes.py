@@ -27,3 +27,16 @@ class Recipes(BaseModel):
     next: Union[str, None]
     previous: Union[str, None]
     results: list[RecipesResult]
+
+
+class RecipesValidationError(BaseModel):
+    cooking_time: list = Field(...)
+
+    @validator("cooking_time")
+    def validate_cooking_time(cls, value):
+        if value[0] not in ErrorMessaages.WRONG_VALIDATE_ERRORS:
+            raise ValueError(f'Что то пошло не так, {value[0]}')
+        
+
+class RecipesNotLoggedError(BaseModel):
+    detail: str = Field(...)
