@@ -12,14 +12,14 @@ from .ingredients_schemes import Ingredients
 class RecipesResult(BaseModel):
     id: int
     tags: list[Tags]
-    author: Users
+    author: Users = Field(...)
     ingredients: list[Ingredients]
-    is_favorited: bool
-    is_in_shopping_cart: bool
-    name: str
-    image: str
-    text: str
-    cooking_time: int
+    is_favorited: bool = Field(...)
+    is_in_shopping_cart: bool = Field(...)
+    name: constr(max_length=150) = Field(...)
+    image: AnyUrl
+    text: str = Field(...)
+    cooking_time: int = Field(...)
 
 
 class Recipes(BaseModel):

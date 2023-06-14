@@ -86,28 +86,19 @@ class RecipeData():
                         }
 
 
-
-
-
-# {'count': 1, 
-#  'next': None, 
-#  'previous': None, 
-#  'results': 
-#         [{'id': 1, 
-#         'tags': [{'id': 1, 
-#                     'name': 'Завтрак', 
-#                     'color': '#00FA9A', 
-#                     'slug': '1'}], 
-#                     'author': {'id': 1, 
-#                                 'email': 'admin@admin.ru', 
-#                                 'username': 'admin', 
-#                                 'first_name': 'admin', 
-#                                 'last_name': 'admin', 
-#                                 'is_subscribed': False}, 
-#                     'ingredients': [], 
-#                     'is_favorited': False, 
-#                     'is_in_shopping_cart': False, 
-#                     'name': 'test_recipe', 
-#                     'image': 'http://localhost/media/recipes/images/rick-and-morty-cartoon-characters-adventure-wallpaper-2880x1800_8.jpg', 
-#                     'text': 'description test recipe', 
-#                     'cooking_time': 20}]}
+    RECIPE_PATCH_DATA = {
+                            "ingredients": [
+                                {
+                                    "id": 1123,
+                                    "amount": 10
+                                }
+                            ],
+                            "tags": [
+                                1,
+                                2
+                            ],
+                            "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAgMAAABieywaAAAACVBMVEUAAAD///9fX1/S0ecCAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAACklEQVQImWNoAAAAggCByxOyYQAAAABJRU5ErkJggg==",
+                            "name": "patch test recipe",
+                            "text": "path description test",
+                            "cooking_time": 1
+                        }

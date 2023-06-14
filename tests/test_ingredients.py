@@ -20,6 +20,5 @@ def test_ingredients_list():
     r = requests.get(url=IngredientsEndPoints.INGREDIENTS_LIST)
     # response = Response(r)
     # response.assert_status_code(200)
-    print(r.json())
-    print(r.status_code)
+
     # response.validate(UserList)

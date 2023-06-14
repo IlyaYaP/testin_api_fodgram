@@ -1,6 +1,8 @@
 import allure
 import pytest
 import requests
+import urllib3
+import json
 
 from src.api_objects.users_object import UsersValidate
 from src.base_validate import NoResponse, Response
@@ -8,6 +10,7 @@ from src.data import UsersData, RecipeData
 from src.endpoints import UsersEndPoints, RecipesEndPoints
 from src.validation_schemes.recipes_schemes import Recipes, RecipesResult, RecipesValidationError, RecipesNotLoggedError
 from src.validation_schemes.user_schemes import UserList
+
 
 
 
@@ -39,12 +42,18 @@ def test_negative_create_recipe_user_not_logged():
     r = requests.post(url=RecipesEndPoints.RECIPES_LIST, json=RecipeData.INVALID_RECIPE_CREATE_DATA)
     response = Response(r)
     response.assert_status_code(401)
-    print(r.json())
     response.validate(RecipesNotLoggedError)
 
 
-
-
+@pytest.mark.test_get_recipe
+@allure.story('Тест получения рецепта.')
+def test_get_recipe():
+    recipes_list = requests.get(url=RecipesEndPoints.RECIPES_LIST)
+    id = recipes_list.json()['results'][0]['id']
+    r = requests.get(url=f'http://localhost/api/recipes/{id}/')
+    response = Response(r)
+    response.assert_status_code(200)
+    response.validate(RecipesResult)
 
 
 @pytest.mark.test_recipes_list
@@ -54,3 +63,19 @@ def test_recipes_list():
     response = Response(r)
     response.assert_status_code(200)
     response.validate(Recipes)
+
+
+@pytest.mark.test_patch_recipe
+@allure.story('Тест изменения рецепта.')
+def test_patch_recipe():
+    token = Response.user_auth_token(data=UsersData.LOGIN_USER_TOKEN_DATA)
+    headers = {'Authorization': f'Token {token}'}
+    recipes_list = requests.get(url=RecipesEndPoints.RECIPES_LIST)
+    id = recipes_list.json()['results'][0]['id']
+    r = requests.patch(url=f'http://localhost/api/recipes/{id}/', json=RecipeData.RECIPE_PATCH_DATA, headers=headers)
+    print(r.json())
+    # тестовый рецепт меняется, надо написать валидатор
+
+    # response = Response(r)
+    # response.assert_status_code(200)
+    # response.validate(Recipes)

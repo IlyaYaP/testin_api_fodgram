@@ -45,7 +45,7 @@ class InvalidUserRegistration(BaseModel):
 
 
 class UsersProfileError(BaseModel):
-    detail: str
+    detail: str = Field(...)
 
 
 class InvalidChangingPassword(BaseModel):
