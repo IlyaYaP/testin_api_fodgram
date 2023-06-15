@@ -61,7 +61,12 @@ class RecipeData():
                                 1,
                                 2
                             ],
-                            "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAgMAAABieywaAAAACVBMVEUAAAD///9fX1/S0ecCAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAACklEQVQImWNoAAAAggCByxOyYQAAAABJRU5ErkJggg==",
+                            "image": "data:image/png;base64, \
+                                        iVBORw0KGgoAAAANSUhEUgAAAAEAAA\
+                                        ABAgMAAABieywaAAAACVBMVEUAAAD\
+                                        ///9fX1/S0ecCAAAACXBIWXMAAA\
+                                        7EAAAOxAGVKw4bAAAACklEQVQI\
+                                        mWNoAAAAggCByxOyYQAAAABJRU5ErkJggg==",
                             "name": "test recipe",
                             "text": "description test",
                             "cooking_time": 1
@@ -79,12 +84,16 @@ class RecipeData():
                                 1,
                                 2
                             ],
-                            "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAgMAAABieywaAAAACVBMVEUAAAD///9fX1/S0ecCAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAACklEQVQImWNoAAAAggCByxOyYQAAAABJRU5ErkJggg==",
+                            "image": "data:image/png;base64, \
+                                        iVBORw0KGgoAAAANSUhEUgAAAAEAAA\
+                                        ABAgMAAABieywaAAAACVBMVEUAAAD\
+                                        ///9fX1/S0ecCAAAACXBIWXMAAA\
+                                        7EAAAOxAGVKw4bAAAACklEQVQI\
+                                        mWNoAAAAggCByxOyYQAAAABJRU5ErkJggg==",
                             "name": "test recipe",
                             "text": "description test",
                             "cooking_time": "str"
                         }
-
 
     RECIPE_PATCH_DATA = {
                             "ingredients": [
@@ -97,8 +106,35 @@ class RecipeData():
                                 1,
                                 2
                             ],
-                            "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAgMAAABieywaAAAACVBMVEUAAAD///9fX1/S0ecCAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAACklEQVQImWNoAAAAggCByxOyYQAAAABJRU5ErkJggg==",
+                            "image": "data:image/png;base64, \
+                                        iVBORw0KGgoAAAANSUhEUgAAAAEAAA\
+                                        ABAgMAAABieywaAAAACVBMVEUAAAD\
+                                        ///9fX1/S0ecCAAAACXBIWXMAAA\
+                                        7EAAAOxAGVKw4bAAAACklEQVQI\
+                                        mWNoAAAAggCByxOyYQAAAABJRU5ErkJggg==",
                             "name": "patch test recipe",
                             "text": "path description test",
                             "cooking_time": 1
+                        }
+
+    INVALID_RECIPE_PATCH_DATA = {
+                            "ingredients": [
+                                {
+                                    "id": 1123,
+                                    "amount": 10
+                                }
+                            ],
+                            "tags": [
+                                1,
+                                2
+                            ],
+                            "image": "data:image/png;base64, \
+                                        iVBORw0KGgoAAAANSUhEUgAAAAEAAA\
+                                        ABAgMAAABieywaAAAACVBMVEUAAAD\
+                                        ///9fX1/S0ecCAAAACXBIWXMAAA\
+                                        7EAAAOxAGVKw4bAAAACklEQVQI\
+                                        mWNoAAAAggCByxOyYQAAAABJRU5ErkJggg==",
+                            "name": "patch test recipe",
+                            "text": "path description test",
+                            "cooking_time": "str"
                         }

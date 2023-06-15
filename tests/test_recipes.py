@@ -8,7 +8,7 @@ from src.api_objects.users_object import UsersValidate
 from src.base_validate import NoResponse, Response
 from src.data import UsersData, RecipeData
 from src.endpoints import UsersEndPoints, RecipesEndPoints
-from src.validation_schemes.recipes_schemes import Recipes, RecipesResult, RecipesValidationError, RecipesNotLoggedError
+from src.validation_schemes.recipes_schemes import Recipes, RecipesResult, RecipesValidationError, RecipesNotLoggedError, RecipesPatch
 from src.validation_schemes.user_schemes import UserList
 
 
@@ -73,9 +73,43 @@ def test_patch_recipe():
     recipes_list = requests.get(url=RecipesEndPoints.RECIPES_LIST)
     id = recipes_list.json()['results'][0]['id']
     r = requests.patch(url=f'http://localhost/api/recipes/{id}/', json=RecipeData.RECIPE_PATCH_DATA, headers=headers)
-    print(r.json())
-    # тестовый рецепт меняется, надо написать валидатор
+    response = Response(r)
+    response.assert_status_code(200)
+    response.validate(RecipesPatch)
 
-    # response = Response(r)
-    # response.assert_status_code(200)
-    # response.validate(Recipes)
+
+@pytest.mark.test_negative_patch_recipe_validation_error
+@allure.story('Тест изменения рецепта c невалидными данными.')
+def test_negative_patch_recipe_validation_error():
+    token = Response.user_auth_token(data=UsersData.LOGIN_USER_TOKEN_DATA)
+    headers = {'Authorization': f'Token {token}'}
+    recipes_list = requests.get(url=RecipesEndPoints.RECIPES_LIST)
+    id = recipes_list.json()['results'][0]['id']
+    r = requests.patch(url=f'http://localhost/api/recipes/{id}/', json=RecipeData.INVALID_RECIPE_PATCH_DATA, headers=headers)
+    response = Response(r)
+    response.assert_status_code(400)
+    response.validate(RecipesValidationError)
+
+@pytest.mark.test_patch_recipe_user_not_logged
+@allure.story('Тест изменения рецепта, без авторизации.')
+def test_patch_recipe_user_not_logged():
+    recipes_list = requests.get(url=RecipesEndPoints.RECIPES_LIST)
+    id = recipes_list.json()['results'][0]['id']
+    r = requests.patch(url=f'http://localhost/api/recipes/{id}/', json=RecipeData.RECIPE_PATCH_DATA)
+    response = Response(r)
+    response.assert_status_code(401)
+    response.validate(RecipesNotLoggedError)
+
+
+@pytest.mark.test_delet_recipe
+@allure.story('Тест удаления рецепта.')
+def test_delet_recipe():
+    token = Response.user_auth_token(data=UsersData.LOGIN_USER_TOKEN_DATA)
+    headers = {'Authorization': f'Token {token}'}
+    recipes_list = requests.get(url=RecipesEndPoints.RECIPES_LIST)
+    id = recipes_list.json()['results'][0]['id']
+    r = requests.delete(url=f'http://localhost/api/recipes/{id}/', headers=headers)
+    if r.status_code == 204:
+        test_create_recipe()
+    else:
+        assert r.status_code != 204, f'{r.status_code}'

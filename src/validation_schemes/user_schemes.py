@@ -41,7 +41,8 @@ class InvalidUserRegistration(BaseModel):
     @validator("email", "username")
     def validatet_email(cls, value):
         if value[0] not in ErrorMessaages.WRONG_VALIDATE_ERRORS:
-            raise ValueError(f'Что то пошло не так, {value[0]}')
+            raise ValueError(f'Ошибка валидации, {value[0]}')
+        return value
 
 
 class UsersProfileError(BaseModel):
