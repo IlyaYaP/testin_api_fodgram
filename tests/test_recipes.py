@@ -102,4 +102,4 @@ def test_delet_recipe():
     if r.status_code == 204:
         test_create_recipe()
     else:
-        assert r.status_code != 204, f'{r.status_code}'
+        assert f'{r.status_code}'

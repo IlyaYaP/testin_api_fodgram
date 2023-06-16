@@ -65,3 +65,14 @@ class RecipesValidationError(BaseModel):
 
 class RecipesNotLoggedError(BaseModel):
     detail: str = Field(...)
+
+
+class RecipesFavorite(BaseModel):
+    id: int
+    name: constr(max_length=150) = Field(...)
+    image: AnyUrl
+    cooking_time: int = Field(...)
+
+
+class RecipesFavoriteError(BaseModel):
+    errors: list[str]
