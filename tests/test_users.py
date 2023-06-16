@@ -43,8 +43,7 @@ def test_negative_user_registration():
 @pytest.mark.test_get_user_profile
 @allure.story('Тест получения информации о пользователе.')
 def test_get_user_profile():
-    token = Response.user_auth_token(data=UsersData.LOGIN_USER_TOKEN_DATA)
-    headers = {'Authorization': f'Token {token}'}
+    headers = Response.user_auth_token(data=UsersData.LOGIN_USER_TOKEN_DATA)
     r = requests.get(url=UsersEndPoints.USER_PROFILE, headers=headers)
     response = UsersValidate(r)
     response.assert_status_code(200)
@@ -54,8 +53,7 @@ def test_get_user_profile():
 @pytest.mark.test_nagative_get_user_profile_object_not_found
 @allure.story('Тест получения информации о несуществующем пользователе.')
 def test_nagative_get_user_profile_object_not_found():
-    token = Response.user_auth_token(data=UsersData.LOGIN_USER_TOKEN_DATA)
-    headers = {'Authorization': f'Token {token}'}
+    headers = Response.user_auth_token(data=UsersData.LOGIN_USER_TOKEN_DATA)
     r = requests.get(url=UsersEndPoints.INVALIDE_USER_PROFILE, headers=headers)
     response = UsersValidate(r)
     response.assert_status_code(404)
@@ -75,8 +73,7 @@ def test_negative_get_user_profile_not_logged():
 @allure.story('Тест получения информации о текущем пользователе.')
 def test_get_current_user():
     r = requests.post(url=UsersEndPoints.USER_TOKEN, data=UsersData.LOGIN_USER_TOKEN_DATA)
-    token = Response.user_auth_token(data=UsersData.LOGIN_USER_TOKEN_DATA)
-    headers = {'Authorization': f'Token {token}'}
+    headers = Response.user_auth_token(data=UsersData.LOGIN_USER_TOKEN_DATA)
     r = requests.get(url=UsersEndPoints.CURRENT_USER, headers=headers)
     response = UsersValidate(r)
     response.assert_status_code(200)
@@ -95,8 +92,7 @@ def test_negative_get_current_user():
 @pytest.mark.test_changing_password
 @allure.story('Тест изменения пароля.')
 def test_changing_password():
-    token = Response.user_auth_token(data=UsersData.LOGIN_USER_TOKEN_DATA)
-    headers = {'Authorization': f'Token {token}'}
+    headers = Response.user_auth_token(data=UsersData.LOGIN_USER_TOKEN_DATA)
     r = requests.post(url=UsersEndPoints.CHANGING_PASSWORD, data=UsersData.CHANGING_PASSWORD_DATA, headers=headers)
     if r.status_code == 204:
         requests.post(url=UsersEndPoints.CHANGING_PASSWORD, data=UsersData.RETURN_CHANGING_PASSWORD_DATA, headers=headers)
@@ -116,8 +112,7 @@ def test_negative_changing_password_user_not_logged():
 @pytest.mark.test_changing_password_validation_error
 @allure.story('Тест изменения пароля, с некорректными данными.')
 def test_negative_changing_password_validation_error():
-    token = Response.user_auth_token(data=UsersData.LOGIN_USER_TOKEN_DATA)
-    headers = {'Authorization': f'Token {token}'}
+    headers = Response.user_auth_token(data=UsersData.LOGIN_USER_TOKEN_DATA)
     r = requests.post(url=UsersEndPoints.CHANGING_PASSWORD, data=UsersData.INVALIDE_CHANGING_PASSWORD_DATA, headers=headers)
     response = UsersValidate(r)
     response.assert_status_code(400)
@@ -127,8 +122,7 @@ def test_negative_changing_password_validation_error():
 @pytest.mark.test_delete_token
 @allure.story('Тест удаления токена.')
 def test_delete_token():
-    token = Response.user_auth_token(data=UsersData.LOGIN_USER_TOKEN_DATA)
-    headers = {'Authorization': f'Token {token}'}
+    headers = Response.user_auth_token(data=UsersData.LOGIN_USER_TOKEN_DATA)
     r = requests.post(url=UsersEndPoints.DELETE_TOKEN, headers=headers)
     response = NoResponse(r)
     response.assert_status_code(204)
