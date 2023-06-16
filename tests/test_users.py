@@ -101,7 +101,7 @@ def test_changing_password():
     if r.status_code == 204:
         requests.post(url=UsersEndPoints.CHANGING_PASSWORD, data=UsersData.RETURN_CHANGING_PASSWORD_DATA, headers=headers)
     else:
-        assert r.status_code != 204, f'{r.status_code}'
+        assert f'Статус код = {r.status_code}'
 
 
 @pytest.mark.test_changing_password_user_not_logged

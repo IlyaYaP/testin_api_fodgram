@@ -21,3 +21,6 @@ class RecipesEndPoints():
 
 class IngredientsEndPoints():
     INGREDIENTS_LIST = 'http://localhost/api/ingredients/'
+
+class ShoppingCartEndPoints():
+    DOWNLOAD_SHOPPING_CART = 'http://localhost/api/recipes/download_shopping_cart/'
