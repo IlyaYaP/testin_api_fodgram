@@ -32,10 +32,9 @@ class Response():
         with allure.step('Получаем токен.'):
 
             r = requests.post(url=UsersEndPoints.USER_TOKEN, data=data)
-            # token = response.user_auth_token()
-            # headers = {'Authorization': f'Token {token}'}
             user_token = r.json()["auth_token"]
-            return user_token
+            headers = {'Authorization': f'Token {user_token}'}
+            return headers
 
 
 class NoResponse():

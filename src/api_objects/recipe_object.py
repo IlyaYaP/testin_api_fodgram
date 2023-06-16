@@ -1,4 +1,5 @@
 import allure
+import requests
 
 from src.base_validate import Response
 from src.errors import ErrorMessaages
@@ -15,3 +16,8 @@ class RecipeValidate(Response):
                     print(f'status_code = {self.response_status}, respone = {self.response_json}')
             else:
                 assert self.response_status == 404, 'Проверьте, что в url указан id существующего рецепта'
+    
+    def recipe_id(url):
+        recipes_list = requests.get(url=url)
+        recipe_id = recipes_list.json()['results'][0]['id']
+        return recipe_id
