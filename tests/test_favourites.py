@@ -56,7 +56,7 @@ def test_recipe_delete_favorites():
     response.assert_status_code(204)
 
 @pytest.mark.test_recipe_delete_favorites_user_not_logged
-@allure.story('Тест добавления рецептов в избранное, без авторизации')
+@allure.story('Тест удаления рецептов в избранное, без авторизации')
 def test_negative_recipe_delete_favorites_user_not_logged():
     recipe_id = RecipeValidate.recipe_id(url=RecipesEndPoints.RECIPES_LIST)
     url_shopping_cart = f'http://localhost/api/recipes/{recipe_id}/favorite/'
