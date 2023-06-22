@@ -1,10 +1,11 @@
+from pathlib import Path
+
 import allure
 import pytest
 import requests
-from pathlib import Path
 
-from src.api_objects.shopping_cart_object import ShoppingCartValidate
 from src.api_objects.recipe_object import RecipeValidate
+from src.api_objects.shopping_cart_object import ShoppingCartValidate
 from src.base_validate import NoResponse, Response
 from src.data import UsersData
 from src.endpoints import RecipesEndPoints, ShoppingCartEndPoints

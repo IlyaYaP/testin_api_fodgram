@@ -2,13 +2,12 @@ import allure
 import pytest
 import requests
 
-
 from src.api_objects.recipe_object import RecipeValidate
 from src.base_validate import NoResponse, Response
 from src.data import UsersData
 from src.endpoints import RecipesEndPoints
-from src.validation_schemes.recipes_schemes import RecipesFavorite
 from src.validation_schemes.errors_schemes import Error400, Error401
+from src.validation_schemes.recipes_schemes import RecipesFavorite
 
 
 @pytest.mark.test_add_recipe_favorites
@@ -32,6 +31,7 @@ def test_negative_add_recipe_favorites():
     response = Response(r)
     response.assert_status_code(400)
     response.validate(Error400)
+    print(r.json())
 
 @pytest.mark.test_negative_add_recipe_favorites_user_not_logged
 @allure.story('Тест добавления рецептов в избранное, без авторизации')

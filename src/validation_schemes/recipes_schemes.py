@@ -1,12 +1,12 @@
-from typing import Optional, Union
+from typing import Union
 
-from pydantic import (AnyUrl, BaseModel, EmailStr, Field, HttpUrl, constr,
-                      validator)
+from pydantic import AnyUrl, BaseModel, Field, constr, validator
 
 from src.errors import ErrorMessaages
-from .user_schemes import Users
-from .tags_schemes import Tags
+
 from .ingredients_schemes import Ingredients
+from .tags_schemes import Tags
+from .user_schemes import Users
 
 
 class RecipesResult(BaseModel):
@@ -21,6 +21,7 @@ class RecipesResult(BaseModel):
     text: str = Field(...)
     cooking_time: int = Field(...)
 
+
 class RecipesPatch(BaseModel):
     id: int
     tags: list[Tags]
@@ -32,19 +33,19 @@ class RecipesPatch(BaseModel):
     image: AnyUrl
     text: str = Field(...)
     cooking_time: int = Field(...)
-    
+
     @validator('name')
     def name_validator(cls, value):
         if value != 'patch test recipe':
             raise ValueError(f'Ошибка валидации, {value}')
         return value
-    
+
     @validator('text')
     def text_validator(cls, value):
         if value != 'path description test':
             raise ValueError(f'Ошибка валидации, {value}')
         return value
-        
+
 
 class Recipes(BaseModel):
     count: int
@@ -60,7 +61,6 @@ class RecipesValidationError(BaseModel):
     def validate_cooking_time(cls, value):
         if value[0] not in ErrorMessaages.WRONG_VALIDATE_ERRORS:
             raise ValueError(f'Ошибка валидации, {value[0]}')
-
 
 
 class RecipesNotLoggedError(BaseModel):

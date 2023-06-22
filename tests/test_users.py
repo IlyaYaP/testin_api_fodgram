@@ -8,13 +8,13 @@ from src.data import UsersData
 from src.endpoints import UsersEndPoints
 from src.validation_schemes.user_schemes import (InvalidChangingPassword,
                                                  InvalidUserRegistration,
-                                                 UserList,
-                                                 Users, UsersProfileError)
+                                                 UserList, Users,
+                                                 UsersProfileError)
 
 
-@pytest.mark.test_user_list
+@pytest.mark.test_get_users_list
 @allure.story('Тест получения списка пользователей.')
-def test_users_list():
+def test_get_users_list():
     r = requests.get(url=UsersEndPoints.LIST_USERS)
     response = Response(r)
     response.assert_status_code(200)

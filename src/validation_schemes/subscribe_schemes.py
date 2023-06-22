@@ -1,8 +1,6 @@
-from typing import Optional, Union
+from typing import Union
 
-from pydantic import (AnyUrl, BaseModel, EmailStr, Field, HttpUrl, constr,
-                      validator)
-
+from pydantic import AnyUrl, BaseModel, EmailStr, Field, constr
 
 
 class RecipesResult(BaseModel):
@@ -11,12 +9,14 @@ class RecipesResult(BaseModel):
     image: AnyUrl
     cooking_time: int = Field(...)
 
+
 class SubscribeError_401(BaseModel):
     detail: str = Field(...)
 
 
 class SubscribeErrors(BaseModel):
     errors: list[str]
+
 
 class Subscribe(BaseModel):
     id: int

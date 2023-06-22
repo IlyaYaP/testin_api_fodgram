@@ -1,7 +1,8 @@
 import allure
 
 from src.base_validate import Response
-from src.validation_schemes.shopping_cart_schemes import ShoppingCart, ShoppingCartError
+from src.validation_schemes.shopping_cart_schemes import (ShoppingCart,
+                                                          ShoppingCartError)
 
 
 class ShoppingCartValidate(Response):

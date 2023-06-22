@@ -1,7 +1,6 @@
 from typing import Union
 
-from pydantic import (BaseModel, EmailStr, Field, constr,
-                      validator)
+from pydantic import BaseModel, EmailStr, Field, constr, validator
 
 from src.errors import ErrorMessaages
 

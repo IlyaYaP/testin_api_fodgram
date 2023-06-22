@@ -6,6 +6,7 @@ from src.base_validate import Response
 from src.endpoints import IngredientsEndPoints
 from src.validation_schemes.ingredients_schemes import Ingredients
 
+
 @pytest.mark.test_ingredients_list
 @allure.story('Тест получения списка рецептов.')
 def test_ingredients_list():

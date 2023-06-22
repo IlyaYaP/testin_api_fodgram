@@ -2,15 +2,11 @@ import allure
 import pytest
 import requests
 
-from src.api_objects.users_object import UsersValidate
-from src.base_validate import NoResponse, Response
-from src.data import UsersData
-from src.endpoints import UsersEndPoints, TagsEndPoints
-from src.validation_schemes.user_schemes import (InvalidChangingPassword,
-                                                 InvalidUserRegistration,
-                                                 UserList,
-                                                 Users, UsersProfileError)
-from src.validation_schemes.tags_schemes import (Tags, TagsError)
+from src.base_validate import Response
+
+from src.endpoints import TagsEndPoints
+from src.validation_schemes.tags_schemes import Tags, TagsError
+
 
 @pytest.mark.test_tags_list
 @allure.story('Тест получения списка тегов.')

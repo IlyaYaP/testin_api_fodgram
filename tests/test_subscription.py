@@ -2,14 +2,13 @@ import allure
 import pytest
 import requests
 
-
-from src.api_objects.users_object import UsersValidate
 from src.api_objects.subscribe_object import SubscribeValidate
+from src.api_objects.users_object import UsersValidate
 from src.base_validate import NoResponse, Response
 from src.data import UsersData
-from src.endpoints import UsersEndPoints, SubscriptionEndPoints
-from src.validation_schemes.subscribe_schemes import Subscriptions
+from src.endpoints import SubscriptionEndPoints, UsersEndPoints
 from src.validation_schemes.errors_schemes import Error401
+from src.validation_schemes.subscribe_schemes import Subscribe, Subscriptions
 
 
 @pytest.mark.test_subscribe_to_user
@@ -18,10 +17,10 @@ def test_subscribe_to_user():
     headers = Response.user_auth_token(data=UsersData.LOGIN_USER_TOKEN_DATA)
     user_id = UsersValidate.user_id(url=UsersEndPoints.LIST_USERS)
     url_subscription = f'http://localhost/api/users/{user_id}/subscribe/'
-    r = requests.post(url= url_subscription, headers=headers)
+    r = requests.post(url=url_subscription, headers=headers)
     response = Response(r)
     response.assert_status_code(201)
-    response.validate(Subscriptions)
+    response.validate(Subscribe)
 
 
 @pytest.mark.test_negative_subscribe_to_user_not_logged
@@ -29,7 +28,7 @@ def test_subscribe_to_user():
 def test_negative_subscribe_to_user_not_logged():
     user_id = UsersValidate.user_id(url=UsersEndPoints.LIST_USERS)
     url_subscription = f'http://localhost/api/users/{user_id}/subscribe/'
-    r = requests.post(url= url_subscription)
+    r = requests.post(url=url_subscription)
     response = SubscribeValidate(r)
     response.assert_status_code(401)
     response.validate(Error401)
@@ -60,7 +59,7 @@ def test_unsubscribe_to_user():
     headers = Response.user_auth_token(data=UsersData.LOGIN_USER_TOKEN_DATA)
     user_id = UsersValidate.user_id(url=UsersEndPoints.LIST_USERS)
     url_subscription = f'http://localhost/api/users/{user_id}/subscribe/'
-    r = requests.delete(url= url_subscription, headers=headers)
+    r = requests.delete(url=url_subscription, headers=headers)
     response = NoResponse(r)
     response.assert_status_code(204)
 

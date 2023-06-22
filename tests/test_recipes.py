@@ -2,14 +2,14 @@ import allure
 import pytest
 import requests
 
-
 from src.api_objects.recipe_object import RecipeValidate
 from src.base_validate import Response
-from src.data import UsersData, RecipeData
+from src.data import RecipeData, UsersData
 from src.endpoints import RecipesEndPoints
-from src.validation_schemes.recipes_schemes import Recipes, RecipesResult, RecipesPatch, RecipesValidationError
-from src.validation_schemes.errors_schemes import Error400, Error401
-
+from src.validation_schemes.errors_schemes import Error401
+from src.validation_schemes.recipes_schemes import (Recipes, RecipesPatch,
+                                                    RecipesResult,
+                                                    RecipesValidationError)
 
 
 @pytest.mark.test_create_recipe
