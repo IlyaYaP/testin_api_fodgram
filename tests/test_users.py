@@ -146,7 +146,6 @@ class TestDeleteToken():
         response = NoResponse(r)
         response.assert_status_code(204)
 
-
     @pytest.mark.test_delete_token_user_not_logged
     @allure.story('Тест удаления токена, без авторизации.')
     def test_negative_delete_token_user_not_logged():
