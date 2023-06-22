@@ -12,7 +12,6 @@ class SubscribeValidate(Response):
             if self.response_status == 201:
                 with allure.step('Статус-код 201, успешно подписались, проверяем валидность ответа.'):
                     Subscribe.parse_obj(self.response_json)
-                    print(f'status_code = {self.response_status}, respone = {self.response_json}')
             elif self.response_status == 400:
                 with allure.step('Статус-код 400, ошибка, проверяем валидность ответа.'):
                     SubscribeErrors.parse_obj(self.response_json)

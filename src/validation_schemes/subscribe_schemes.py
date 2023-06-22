@@ -27,3 +27,10 @@ class Subscribe(BaseModel):
     is_subscribed: bool
     recipes: list[RecipesResult]
     recipes_count: int
+
+
+class Subscriptions(BaseModel):
+    count: int
+    next: Union[str, None]
+    previous: Union[str, None]
+    results: list[Subscribe]
