@@ -1,19 +1,16 @@
 import allure
 import pytest
 import requests
-import urllib3
-import json
-from pathlib import Path
+
 
 from src.api_objects.users_object import UsersValidate
 from src.api_objects.subscribe_object import SubscribeValidate
 from src.base_validate import NoResponse, Response
-from src.data import UsersData, RecipeData
-from src.endpoints import UsersEndPoints, RecipesEndPoints, ShoppingCartEndPoints, SubscriptionEndPoints
-from src.validation_schemes.recipes_schemes import Recipes, RecipesResult
-from src.validation_schemes.user_schemes import UserList, UsersProfileError
-from src.validation_schemes.shopping_cart_schemes import ShoppingCart
-from src.validation_schemes.subscribe_schemes import SubscribeError_401, Subscriptions
+from src.data import UsersData
+from src.endpoints import UsersEndPoints, SubscriptionEndPoints
+from src.validation_schemes.subscribe_schemes import Subscriptions
+from src.validation_schemes.errors_schemes import Error401
+
 
 @pytest.mark.test_subscribe_to_user
 @allure.story('Тест подписки на пользователя.')
@@ -22,8 +19,9 @@ def test_subscribe_to_user():
     user_id = UsersValidate.user_id(url=UsersEndPoints.LIST_USERS)
     url_subscription = f'http://localhost/api/users/{user_id}/subscribe/'
     r = requests.post(url= url_subscription, headers=headers)
-    response = SubscribeValidate(r)
-    response.subscribe_validate()
+    response = Response(r)
+    response.assert_status_code(201)
+    response.validate(Subscriptions)
 
 
 @pytest.mark.test_negative_subscribe_to_user_not_logged
@@ -34,7 +32,7 @@ def test_negative_subscribe_to_user_not_logged():
     r = requests.post(url= url_subscription)
     response = SubscribeValidate(r)
     response.assert_status_code(401)
-    response.validate(SubscribeError_401)
+    response.validate(Error401)
 
 
 @pytest.mark.test_get_subscriptions
@@ -53,9 +51,7 @@ def test_get_subscriptions_user_not_logged():
     r = requests.get(url=SubscriptionEndPoints.MY_SUBSCRIPTION)
     response = SubscribeValidate(r)
     response.assert_status_code(401)
-
-
-
+    response.validate(Error401)
 
 
 @pytest.mark.test_unsubscribe_to_user

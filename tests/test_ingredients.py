@@ -2,10 +2,8 @@ import allure
 import pytest
 import requests
 
-from src.api_objects.users_object import UsersValidate
-from src.base_validate import NoResponse, Response
-from src.data import UsersData
-from src.endpoints import UsersEndPoints, RecipesEndPoints, IngredientsEndPoints
+from src.base_validate import Response
+from src.endpoints import IngredientsEndPoints
 from src.validation_schemes.ingredients_schemes import Ingredients
 
 @pytest.mark.test_ingredients_list

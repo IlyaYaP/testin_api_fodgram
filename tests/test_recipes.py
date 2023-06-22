@@ -1,16 +1,14 @@
 import allure
 import pytest
 import requests
-import urllib3
-import json
+
 
 from src.api_objects.recipe_object import RecipeValidate
-from src.base_validate import NoResponse, Response
+from src.base_validate import Response
 from src.data import UsersData, RecipeData
-from src.endpoints import UsersEndPoints, RecipesEndPoints
-from src.validation_schemes.recipes_schemes import Recipes, RecipesResult, RecipesValidationError, RecipesNotLoggedError, RecipesPatch
-from src.validation_schemes.user_schemes import UserList
-
+from src.endpoints import RecipesEndPoints
+from src.validation_schemes.recipes_schemes import Recipes, RecipesResult, RecipesPatch
+from src.validation_schemes.errors_schemes import Error400, Error401
 
 
 
@@ -31,7 +29,7 @@ def test_negative_create_recipe_validation_error():
     r = requests.post(url=RecipesEndPoints.RECIPES_LIST, json=RecipeData.INVALID_RECIPE_CREATE_DATA, headers=headers)
     response = Response(r)
     response.assert_status_code(400)
-    response.validate(RecipesValidationError)
+    response.validate(Error400)
 
 
 @pytest.mark.test_negative_create_recipe_user_not_logged
@@ -40,7 +38,7 @@ def test_negative_create_recipe_user_not_logged():
     r = requests.post(url=RecipesEndPoints.RECIPES_LIST, json=RecipeData.INVALID_RECIPE_CREATE_DATA)
     response = Response(r)
     response.assert_status_code(401)
-    response.validate(RecipesNotLoggedError)
+    response.validate(Error401)
 
 
 @pytest.mark.test_get_recipe
@@ -81,7 +79,7 @@ def test_negative_patch_recipe_validation_error():
     r = requests.patch(url=f'http://localhost/api/recipes/{recipe_id}/', json=RecipeData.INVALID_RECIPE_PATCH_DATA, headers=headers)
     response = Response(r)
     response.assert_status_code(400)
-    response.validate(RecipesValidationError)
+    response.validate(Error400)
 
 @pytest.mark.test_patch_recipe_user_not_logged
 @allure.story('Тест изменения рецепта, без авторизации.')
@@ -90,7 +88,7 @@ def test_patch_recipe_user_not_logged():
     r = requests.patch(url=f'http://localhost/api/recipes/{recipe_id}/', json=RecipeData.RECIPE_PATCH_DATA)
     response = Response(r)
     response.assert_status_code(401)
-    response.validate(RecipesNotLoggedError)
+    response.validate(Error401)
 
 
 @pytest.mark.test_delet_recipe

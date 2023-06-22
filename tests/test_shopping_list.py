@@ -1,18 +1,14 @@
 import allure
 import pytest
 import requests
-import urllib3
-import json
 from pathlib import Path
 
 from src.api_objects.shopping_cart_object import ShoppingCartValidate
 from src.api_objects.recipe_object import RecipeValidate
 from src.base_validate import NoResponse, Response
-from src.data import UsersData, RecipeData
-from src.endpoints import UsersEndPoints, RecipesEndPoints, ShoppingCartEndPoints
-from src.validation_schemes.recipes_schemes import Recipes, RecipesResult
-from src.validation_schemes.user_schemes import UserList, UsersProfileError
-from src.validation_schemes.shopping_cart_schemes import ShoppingCart
+from src.data import UsersData
+from src.endpoints import RecipesEndPoints, ShoppingCartEndPoints
+from src.validation_schemes.errors_schemes import Error401
 
 
 @pytest.mark.test_add_shopping_cart
@@ -46,7 +42,7 @@ def test_negative_download_shopping_cart_not_logged():
     r = requests.get(url=ShoppingCartEndPoints.DOWNLOAD_SHOPPING_CART)
     response = Response(r)
     response.assert_status_code(401)
-    response.validate(UsersProfileError)
+    response.validate(Error401)
 
 
 @pytest.mark.test_delete_shopping_cart
