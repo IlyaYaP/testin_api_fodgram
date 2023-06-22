@@ -24,3 +24,6 @@ class IngredientsEndPoints():
 
 class ShoppingCartEndPoints():
     DOWNLOAD_SHOPPING_CART = 'http://localhost/api/recipes/download_shopping_cart/'
+
+class SubscriptionEndPoints():
+    MY_SUBSCRIPTION = 'http://localhost/api/users/subscriptions/'

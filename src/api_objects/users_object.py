@@ -1,4 +1,5 @@
 import allure
+import requests
 
 from src.base_validate import Response
 from src.errors import ErrorMessaages
@@ -28,3 +29,8 @@ class UsersValidate(Response):
                 assert self.response_status in statuse_code, f'{ErrorMessaages.WRONG_STATUS_CODE}, status code = {self.response_status}, {self.response_json}'
             else:
                 assert self.response_status == statuse_code, f'{ErrorMessaages.WRONG_STATUS_CODE}, status code = {self.response_status}, {self.response_json}'
+    
+    def user_id(url):
+        user_list = requests.get(url=url)
+        user_id = user_list.json()['results'][0]['id']
+        return user_id
