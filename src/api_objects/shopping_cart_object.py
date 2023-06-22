@@ -1,9 +1,6 @@
 import allure
 
 from src.base_validate import Response
-from src.errors import ErrorMessaages
-from src.validation_schemes.user_schemes import (InvalidUserRegistration,
-                                                 UserRegistration)
 from src.validation_schemes.shopping_cart_schemes import ShoppingCart, ShoppingCartError
 
 

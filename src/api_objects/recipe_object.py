@@ -2,7 +2,6 @@ import allure
 import requests
 
 from src.base_validate import Response
-from src.errors import ErrorMessaages
 from src.validation_schemes.recipes_schemes import RecipesResult
 
 

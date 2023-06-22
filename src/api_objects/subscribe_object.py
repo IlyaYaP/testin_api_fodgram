@@ -1,7 +1,6 @@
 import allure
 
 from src.base_validate import Response
-from src.errors import ErrorMessaages
 from src.validation_schemes.subscribe_schemes import Subscribe, SubscribeErrors
 
 
