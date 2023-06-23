@@ -103,15 +103,15 @@ class TestRecipeCreation():
         response.assert_status_code(401)
         response.validate(Error401)
 
-    @pytest.mark.test_delet_recipe
+    @pytest.mark.test_delete_recipe
     @allure.story('Тест удаления рецепта.')
-    def test_delet_recipe(self):
+    def test_delete_recipe(self):
         headers = Response.user_auth_token(
                   data=UsersData.LOGIN_USER_TOKEN_DATA)
         recipe_id = RecipeValidate.recipe_id(url=RecipesEndPoints.RECIPES_LIST)
         r = requests.delete(url=f'http://localhost/api/recipes/{recipe_id}/',
                             headers=headers)
         if r.status_code == 204:
-            TestRecipeCreation.test_create_recipe()
+            self.test_create_recipe()
         else:
             assert f'{r.status_code}'
