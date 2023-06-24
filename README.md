@@ -1,5 +1,7 @@
 # Учебный проект по автоматизации тестирования API 
 В данном проекте реализована попытка автоматизации тестирования API дипломного проекта [Foodgram(YandexPracticum)](https://github.com/IlyaYaP/foodgram-project-react)
+### Стек технологий:
+Стек: Python 3.10, Pytest 7.3.1, Allure-pytest 2.13.2, Pydantic 1.10.8
 # Развертывание проекта
 - Развертываем проект [Foodgram(YandexPracticum)](https://github.com/IlyaYaP/foodgram-project-react) в соответствии с инструкцией.
 - Через [Django administration](http://localhost/admin/) создаем 1-2 тестовых пользователя и рецепта.
