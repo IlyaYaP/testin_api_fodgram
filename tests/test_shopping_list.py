@@ -12,8 +12,8 @@ from src.endpoints import RecipesEndPoints, ShoppingCartEndPoints
 from src.validation_schemes.errors_schemes import Error401
 
 
-@pytest.mark.run(order=5)
-@pytest.mark.shopping_cart_tests
+@pytest.mark.order(5)
+@pytest.mark.shopping_cart_tests(scope='class')
 @allure.feature('Тесты добавления рецептов в список покупок.')
 class TestShoppingCart():
     @pytest.mark.test_add_shopping_cart

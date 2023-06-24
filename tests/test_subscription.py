@@ -11,8 +11,8 @@ from src.validation_schemes.errors_schemes import Error401
 from src.validation_schemes.subscribe_schemes import Subscribe, Subscriptions
 
 
-@pytest.mark.run(order=4)
-@pytest.mark.subscriptions_tests
+@pytest.mark.order(4)
+@pytest.mark.subscriptions_tests(scope='class')
 @allure.feature('Тесты осуществления подписки на пользователя.')
 class TestSubscriptions():
     @pytest.mark.test_subscribe_to_user

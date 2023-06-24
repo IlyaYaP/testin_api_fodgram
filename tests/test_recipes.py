@@ -12,8 +12,8 @@ from src.validation_schemes.recipes_schemes import (Recipes, RecipesPatch,
                                                     RecipesValidationError)
 
 
-@pytest.mark.run(order=2)
-@pytest.mark.recipe_creation_tests
+@pytest.mark.order(2)
+@pytest.mark.recipe_creation_tests(scope='class')
 @allure.feature('Тесты создания рецептов.')
 class TestRecipeCreation():
 

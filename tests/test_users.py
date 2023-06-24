@@ -12,7 +12,7 @@ from src.validation_schemes.user_schemes import (InvalidChangingPassword,
                                                  UsersProfileError)
 
 
-@pytest.mark.run(order=1)
+@pytest.mark.order(1)
 @pytest.mark.users_tests(scope='class')
 @allure.feature('Тесты работы с пользователем.')
 class TestUsers():

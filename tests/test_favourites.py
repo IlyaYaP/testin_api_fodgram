@@ -10,8 +10,8 @@ from src.validation_schemes.errors_schemes import Error400, Error401
 from src.validation_schemes.recipes_schemes import RecipesFavorite
 
 
-@pytest.mark.run(order=3)
-@pytest.mark.recipe_favorites_tests
+@pytest.mark.order(3)
+@pytest.mark.recipe_favorites_tests(scope='class')
 @allure.feature('Тест добавления рецептов в избранное.')
 class TestRecipeFavorites():
     @pytest.mark.test_add_recipe_favorites

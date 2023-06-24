@@ -8,8 +8,8 @@ from src.endpoints import TagsEndPoints
 from src.validation_schemes.tags_schemes import Tags, TagsError
 
 
-@pytest.mark.run(order=7)
-@pytest.mark.tags_tests
+@pytest.mark.order(7)
+@pytest.mark.tags_tests(scope='class')
 @allure.feature('Тесты получения списка тегов.')
 class TestTags():
     @pytest.mark.test_tags_list

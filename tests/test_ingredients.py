@@ -7,8 +7,8 @@ from src.endpoints import IngredientsEndPoints
 from src.validation_schemes.ingredients_schemes import Ingredients
 
 
-@pytest.mark.run(order=6)
-@pytest.mark.ingredients_tests
+@pytest.mark.order(6)
+@pytest.mark.ingredients_tests(scope='class')
 @allure.feature('Тесты получения списка рецептов.')
 class TestIngredients():
     @pytest.mark.test_ingredients_list
