@@ -2,6 +2,7 @@
 В данном проекте реализована попытка автоматизации тестирования API дипломного проекта [Foodgram(YandexPracticum)](https://github.com/IlyaYaP/foodgram-project-react)
 # Развертывание проекта
 - Развертываем проект [Foodgram(YandexPracticum)](https://github.com/IlyaYaP/foodgram-project-react) в соответствии с инструкцией.
+- Через [Django administration](http://localhost/admin/) создаем 1-2 тестовых пользователя и рецепта.
 - После успешного запуска проекта Foodgram клонируем данный репозиторий с проектом:
 ```
 git clone https://github.com/IlyaYaP/testing_api_foodgram.git
