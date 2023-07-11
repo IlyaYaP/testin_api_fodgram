@@ -1,5 +1,6 @@
 name: main-workflow
-
+permissions:
+  contents: write
 on:
   push:
     branches-ignore:
