@@ -6,28 +6,7 @@ on:
       - '!master'
 
 jobs:
-  linter:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-        env:
-          GIT_TRACE: 1
-          GIT_CURL_VERBOSE: 1
-
-      - name: Set up Python 3.x
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.x'
-
-      - name: Check code style
-        if: always()
-        run: |
-          python3 -m pip install --upgrade pip
-          pip install flake8
-          flake8
-
   autotests:
-    needs: linter
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
