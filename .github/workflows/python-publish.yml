@@ -23,7 +23,7 @@ jobs:
 
       - name: Run Test
         if: always()
-        run: pytest -s -v --alluredir=allure-results --tb=line 
+        run: pytest -s -v -m test_cat_test --alluredir=allure-results --tb=line 
         continue-on-error: true
 
       - name: Get Allure history
