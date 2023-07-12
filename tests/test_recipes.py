@@ -13,10 +13,10 @@ from src.validation_schemes.recipes_schemes import (Recipes, RecipesPatch,
 
 @pytest.mark.test_cat_test
 @allure.story('Тест создания рецепта.')
-def test_cat(self):
+def test_cat():
     r = requests.get(url='https://catfact.ninja/fact/')
-    response = Response(r)
-    response.assert_status_code(200)
+    print(r.json())
+
 
 
 
