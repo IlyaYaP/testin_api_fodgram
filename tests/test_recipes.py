@@ -11,6 +11,15 @@ from src.validation_schemes.recipes_schemes import (Recipes, RecipesPatch,
                                                     RecipesResult,
                                                     RecipesValidationError)
 
+@pytest.mark.test_cat_test
+@allure.story('Тест создания рецепта.')
+def test_create_recipe(self):
+    r = requests.get(url='https://catfact.ninja/fact/')
+    response = Response(r)
+    response.assert_status_code(200)
+
+
+
 
 @pytest.mark.order(2)
 @pytest.mark.recipe_creation_tests(scope='class')
