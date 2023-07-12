@@ -13,8 +13,6 @@ jobs:
       - uses: actions/checkout@v2
       - name: Set up Python 3.x
         uses: actions/setup-python@v2
-        env:
-          TP_AGENT_URL: http://localhost:8080
         with:
           python-version: '3.x'
 
@@ -25,7 +23,7 @@ jobs:
 
       - name: Run Test
         if: always()
-        run: pytest -s -v --alluredir=allure-results --tb=long 
+        run: pytest -s -v -U http://localhost:port/ --alluredir=allure-results --tb=long 
         continue-on-error: true
 
       - name: Get Allure history
