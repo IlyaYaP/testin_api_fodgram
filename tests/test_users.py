@@ -2,6 +2,8 @@ import allure
 import pytest
 import requests
 
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
 from src.api_objects.users_object import UsersValidate
 from src.base_validate import NoResponse, Response
 from src.data import UsersData
@@ -11,6 +13,10 @@ from src.validation_schemes.user_schemes import (InvalidChangingPassword,
                                                  UserList, Users,
                                                  UsersProfileError)
 
+session = requests.Session()
+retry = Retry(connect=3, backoff_factor=0.5)
+adapter = HTTPAdapter(max_retries=retry)
+session.mount('http://', adapter)
 
 @pytest.mark.order(1)
 @pytest.mark.users_tests(scope='class')
@@ -19,7 +25,7 @@ class TestUsers():
     @pytest.mark.test_get_users_list
     @allure.story('Тест получения списка пользователей.')
     def test_get_users_list(self):
-        r = requests.get(url=UsersEndPoints.LIST_USERS)
+        r = session.get(url=UsersEndPoints.LIST_USERS)
         response = Response(r)
         response.assert_status_code(200)
         response.validate(UserList)
@@ -27,7 +33,7 @@ class TestUsers():
     @pytest.mark.test_user_registration
     @allure.story('Тест регистрации пользователя.')
     def test_user_registration(self):
-        r = requests.post(url=UsersEndPoints.USER_REGISTRATION,
+        r = session.post(url=UsersEndPoints.USER_REGISTRATION,
                           data=UsersData.USER_REGISTRATION_DATA)
         response = UsersValidate(r)
         response.user_validate()
@@ -36,7 +42,7 @@ class TestUsers():
     @allure.story('Негативный тест регистрации пользователя: \
                    указываем невалидные данные.')
     def test_negative_user_registration(self):
-        r = requests.post(url=UsersEndPoints.USER_REGISTRATION,
+        r = session.post(url=UsersEndPoints.USER_REGISTRATION,
                           data=UsersData.INVALID_USER_REGISTRATION_DATA)
         response = Response(r)
         response.assert_status_code(400)
@@ -47,7 +53,7 @@ class TestUsers():
     def test_get_user_profile(self):
         headers = Response.user_auth_token(
                   data=UsersData.LOGIN_USER_TOKEN_DATA)
-        r = requests.get(url=UsersEndPoints.USER_PROFILE, headers=headers)
+        r = session.get(url=UsersEndPoints.USER_PROFILE, headers=headers)
         response = UsersValidate(r)
         response.assert_status_code(200)
         response.validate(Users)
@@ -57,7 +63,7 @@ class TestUsers():
     def test_nagative_get_user_profile_object_not_found(self):
         headers = Response.user_auth_token(
                   data=UsersData.LOGIN_USER_TOKEN_DATA)
-        r = requests.get(url=UsersEndPoints.INVALIDE_USER_PROFILE,
+        r = session.get(url=UsersEndPoints.INVALIDE_USER_PROFILE,
                          headers=headers)
         response = UsersValidate(r)
         response.assert_status_code(404)
@@ -66,7 +72,7 @@ class TestUsers():
     @pytest.mark.test_negative_get_user_profile_not_logged
     @allure.story('Тест получения информации о пользователе, без авторизации.')
     def test_negative_get_user_profile_not_logged(self):
-        r = requests.get(url=UsersEndPoints.USER_PROFILE)
+        r = session.get(url=UsersEndPoints.USER_PROFILE)
         response = UsersValidate(r)
         response.assert_status_code(401)
         response.validate(UsersProfileError)
@@ -74,7 +80,7 @@ class TestUsers():
     @pytest.mark.test_get_current_user
     @allure.story('Тест получения информации о текущем пользователе.')
     def test_get_current_user(self):
-        r = requests.post(url=UsersEndPoints.USER_TOKEN,
+        r = session.post(url=UsersEndPoints.USER_TOKEN,
                           data=UsersData.LOGIN_USER_TOKEN_DATA)
         headers = Response.user_auth_token(
                   data=UsersData.LOGIN_USER_TOKEN_DATA)
@@ -86,7 +92,7 @@ class TestUsers():
     @pytest.mark.test_negative_get_current_user_not_logged
     @allure.story('Тест получения информации о текущем пользователе, без авторизации.')
     def test_negative_get_current_user(self):
-        r = requests.get(url=UsersEndPoints.CURRENT_USER)
+        r = session.get(url=UsersEndPoints.CURRENT_USER)
         response = UsersValidate(r)
         response.assert_status_code(401)
         response.validate(UsersProfileError)
