@@ -1,12 +1,15 @@
+base_andpoint = 'http://localhost:81'
+
+
 class UsersEndPoints():
-    LIST_USERS = 'http://localhost/api/users/'
-    USER_REGISTRATION = 'http://localhost/api/users/'
-    USER_PROFILE = 'http://localhost/api/users/1/'
-    INVALIDE_USER_PROFILE = 'http://localhost/api/users/99/'
-    USER_TOKEN = 'http://localhost/api/auth/token/login/'
-    CURRENT_USER = 'http://localhost/api/users/me/'
-    CHANGING_PASSWORD = 'http://localhost/api/users/set_password/'
-    DELETE_TOKEN = 'http://localhost/api/auth/token/logout/'
+    LIST_USERS = f'{base_andpoint}/api/users/'
+    USER_REGISTRATION = f'{base_andpoint}/api/users/'
+    USER_PROFILE = f'{base_andpoint}/api/users/1/'
+    INVALIDE_USER_PROFILE = f'{base_andpoint}/api/users/99/'
+    USER_TOKEN = f'{base_andpoint}/api/auth/token/login/'
+    CURRENT_USER = f'{base_andpoint}/api/users/me/'
+    CHANGING_PASSWORD = f'{base_andpoint}/api/users/set_password/'
+    DELETE_TOKEN = f'{base_andpoint}/api/auth/token/logout/'
 
 
 class TagsEndPoints():

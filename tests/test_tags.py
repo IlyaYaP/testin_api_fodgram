@@ -19,10 +19,12 @@ session.mount('http://', adapter)
 @pytest.mark.tags_tests(scope='class')
 @allure.feature('Тесты получения списка тегов.')
 class TestTags():
+    LIST_TAGS = 'http://127.0.0.1/api/tags/'
     @pytest.mark.test_tags_list
     @allure.story('Тест получения списка тегов.')
     def test_tags_list(self):
-        r = session.get(url=TagsEndPoints.LIST_TAGS)
+        # r = session.get(url=TagsEndPoints.LIST_TAGS)
+        r = session.get(url=self.LIST_TAGS)
         response = Response(r)
         response.assert_status_code(200)
         response.validate(Tags)
