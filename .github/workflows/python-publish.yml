@@ -21,6 +21,15 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Run local server
+        run: |
+            cd html/
+            python run_server.py &
+            sleep 5
+            cd ..
+            pip install -r tests/Requirements.txt
+            python -m tags_tests -U http://localhost:port/
+
       - name: Run Test
         if: always()
         # run: pytest -s -v --alluredir=allure-results --tb=line
@@ -49,8 +58,4 @@ jobs:
           PUBLISH_BRANCH: gh-pages
           PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PUBLISH_DIR: allure-history
-#       - name: Deploy to GitHub Pages
-#         uses: JamesIves/github-pages-deploy-action@v4.4.2
-#         with:
-#           folder: allure-history
 
